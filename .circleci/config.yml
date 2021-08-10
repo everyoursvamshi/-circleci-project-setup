@@ -32,7 +32,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - release
+                - circleci-project-setup
       - deploy:
           filters:
             branches:
