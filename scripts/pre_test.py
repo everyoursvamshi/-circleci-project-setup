@@ -13,3 +13,8 @@ validJsonData = """{"name": "jane doe", "salary": 9000, "email": "jane.doe@pynat
 isValid = validateJSON(validJsonData)
 
 print("Given JSON string is Valid", isValid)
+if isValid:
+    return 0
+else:
+    print("Test")
+    return -1
