@@ -1,0 +1,42 @@
+# Tagging a commit with:
+# - [circle front] will build the front page and perform test-doc
+# - [circle full] will build everything
+# - [circle linkcheck] will run our linkcheck
+# - [circle interactive_test] will run our test suite (useful for debugging
+#   issues using "Rerun with SSH")
+
+version: 2.1
+
+jobs:
+    pre-check:
+      docker:
+        - image: cimg/python:3.8
+      steps:
+        - run:
+            name: Set BASH_ENV
+            command: |
+              echo "pre-test"
+    deploy:
+      docker:
+        - image: circleci/python:3.8.5-buster
+      steps:
+        - run:
+            name: Set BASH_ENV
+            command: |
+              echo "post-test"
+
+workflows:
+  default:
+    jobs:
+      - pre-check:
+          filters:
+            branches:
+              ignore:
+                - main
+                - release
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
+                - release
