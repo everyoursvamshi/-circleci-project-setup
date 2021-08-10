@@ -1,4 +1,5 @@
 import json
+import sys
 
 def validateJSON(jsonData):
     try:
@@ -14,7 +15,7 @@ isValid = validateJSON(validJsonData)
 
 print("Given JSON string is Valid", isValid)
 if isValid:
-    exit 0
+    sys.exit(0)
 else:
     print("Test")
-    exit -1
+    sys.exit(-1)
