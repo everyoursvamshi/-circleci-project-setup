@@ -16,6 +16,7 @@ jobs:
             name: Set BASH_ENV
             command: |
               echo "pre-test"
+              sh pre_run.sh
     deploy:
       docker:
         - image: circleci/python:3.8.5-buster
