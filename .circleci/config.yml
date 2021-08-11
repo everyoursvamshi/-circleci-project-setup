@@ -14,6 +14,20 @@ jobs:
       steps:
         - checkout
         - run:
+            name: checkout old version of the branch
+            command: |
+              mkdir test
+              cd test
+              echo "$CIRCLE_REPOSITORY_URL"
+              echo "$CIRCLE_BRANCH"
+              echo "*********************"
+              git clone --depth 5 "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH"
+              cat .circleci/config.yml 
+              cd ..
+              echo "**************old file *******".
+              cat .circleci/config.yml 
+              echo "**************new file *******".
+        - run:
             name: Set BASH_ENV
             command: |
               echo "pre-test"
