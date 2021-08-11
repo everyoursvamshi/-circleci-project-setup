@@ -9,7 +9,6 @@ def validateJSON(jsonData):
     return True
 
 
-
 validJsonData = """{"name": "jane doe", "salary": 9000, "email": "jane.doe@pynative.com", "test": }"""
 isValid = validateJSON(validJsonData)
 
