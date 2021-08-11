@@ -3,7 +3,7 @@ LAST_SUCCESSFUL_COMMIT=$(curl -Ss -u "$API_KEY:" "https://circleci.com/api/v1.1/
 echo $LAST_SUCCESSFUL_COMMIT
 echo $CIRCLE_SHA1
 echo "Thanks"
-
+git diff --name-only $LAST_SUCCESSFUL_COMMIT $CIRCLE_SHA1
 python ./scripts/pre_test.py
 if [ $? -eq 0 ];
 then
