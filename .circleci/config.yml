@@ -22,7 +22,7 @@ jobs:
               echo "$CIRCLE_BRANCH"
               echo "*********************"
               git clone --depth 5 "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH"
-              cat .circleci/config.yml 
+              cat circleci-project-setup/.circleci/config.yml 
               cd ..
               echo "**************old file *******".
               cat .circleci/config.yml 
