@@ -1,4 +1,9 @@
 pwd
+LAST_SUCCESSFUL_COMMIT=$(curl -Ss -u "$API_KEY:" "https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME?filter=successful&limit=1" | jq -r '.[0]["vcs_revision"]')
+echo $LAST_SUCCESSFUL_COMMIT
+echo $CIRCLE_SHA1
+echo "Thanks"
+
 python ./scripts/pre_test.py
 if [ $? -eq 0 ];
 then
