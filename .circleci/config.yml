@@ -12,10 +12,30 @@ jobs:
       docker:
         - image: cimg/python:3.8
       steps:
+        - checkout
+        - run: git clone "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH" ./target/new
+        - run:
+            name: checkout old version of the branch
+            command: |
+              mkdir test
+              cd test
+              echo "$CIRCLE_REPOSITORY_URL"
+              echo "$CIRCLE_BRANCH"
+              echo "*********************"
+              git clone --depth 5 "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH"
+              cat circleci-project-setup/.circleci/config.yml 
+              cd ..
+              echo "**************old file *******".
+              cat .circleci/config.yml 
+              echo "**************new file *******".
+              LAST_SUCCESSFUL_COMMIT=$(curl -Ss -u "$API_KEY:" "https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME?filter=successful&limit=1" | jq -r '.[0]["vcs_revision"]')
+              echo $LAST_SUCCESSFUL_COMMIT
+              echo "Thanks"
         - run:
             name: Set BASH_ENV
             command: |
               echo "pre-test"
+              sh pre_run.sh
     deploy:
       docker:
         - image: circleci/python:3.8.5-buster
@@ -38,4 +58,5 @@ workflows:
             branches:
               only:
                 - circleci-project-setup
+
 
